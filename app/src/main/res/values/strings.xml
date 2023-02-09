@@ -7,4 +7,5 @@
     <string name="health_die_label">Health Die: </string>
     <string name="damage_type_label">Damage Type: </string>
     <string name="archetype_name_label">Archetype: </string>
+    <string name="playable">Playable:</string>
 </resources>

@@ -143,6 +143,25 @@
             app:layout_constraintStart_toEndOf="@id/archetype_complexity_label"
             android:layout_marginStart="5dp"
             />
+        <TextView
+            android:id="@+id/archetype_playable_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/archetype_image"
+            app:layout_constraintTop_toBottomOf="@id/archetype_complexity"
+            android:text="@string/playable"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/archetype_playable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="true/false"
+            app:layout_constraintTop_toTopOf="@id/archetype_playable_label"
+            app:layout_constraintStart_toEndOf="@id/archetype_playable_label"
+            android:layout_marginStart="5dp"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

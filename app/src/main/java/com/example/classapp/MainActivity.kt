@@ -29,9 +29,10 @@ class MainActivity : AppCompatActivity() {
         damageType = "Physical",
         image = R.drawable.cat,
         healthDie = Random.nextInt(1,12),
-        position = "asd",
+        position = "Frontline",
         funLevel = Random.nextInt(1, 10),
         complexity = "Easy",
+        playable = true,
     )
 
 }

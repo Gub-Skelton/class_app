@@ -8,4 +8,5 @@ data class Archetype (
     val position: String,
     val funLevel: Int,
     val complexity: String,
+    val playable: Boolean,
 )

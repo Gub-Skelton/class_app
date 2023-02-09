@@ -27,6 +27,7 @@ class ArchetypeAdapter(private val archetypes: List<Archetype>) : RecyclerView.A
         holder.archetypePosition.text = archetype.position
         holder.archetypeFunLevel.text = archetype.funLevel.toString()
         holder.archetypeComplexity.text = archetype.complexity
+        holder.archetypePlayable.text = archetype.playable.toString()
     }
 
     class ArchetypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -37,5 +38,6 @@ class ArchetypeAdapter(private val archetypes: List<Archetype>) : RecyclerView.A
         val archetypePosition: TextView = itemView.findViewById(R.id.archetype_position)
         val archetypeFunLevel: TextView = itemView.findViewById(R.id.archetype_fun_level)
         val archetypeComplexity: TextView = itemView.findViewById(R.id.archetype_complexity)
+        val archetypePlayable: TextView = itemView.findViewById(R.id.archetype_playable)
     }
 }
