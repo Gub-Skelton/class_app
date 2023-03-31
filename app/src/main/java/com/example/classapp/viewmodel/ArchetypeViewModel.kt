@@ -43,7 +43,7 @@ class ArchetypeViewModel @Inject constructor(
 //            }
 //        }
 //    }
-
+//
     sealed class DnDEvent {
         data class Success(val archetypes: List<DnDClass>) : DnDEvent()
         object Failure : DnDEvent()
