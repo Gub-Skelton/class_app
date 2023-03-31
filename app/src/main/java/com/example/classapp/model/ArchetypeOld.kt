@@ -1,6 +1,6 @@
-package com.example.classapp
+package com.example.classapp.model
 
-data class Archetype(
+data class ArchetypeOld(
     val archetypeName: String,
     val damageType: String,
     val image: String,
@@ -9,6 +9,6 @@ data class Archetype(
     val funLevel: Int,
     val complexity: String,
     val playable: Boolean,
-
+    val id: Int,
     val description: String,
 )
