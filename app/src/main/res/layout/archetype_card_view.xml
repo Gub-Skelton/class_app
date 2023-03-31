@@ -11,24 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/archetype_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="Image for Archetype"
-            app:layout_constraintHeight_max="120dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="120dp"
-            tools:src="@drawable/baseline_accessible_24" />
-
         <TextView
             android:id="@+id/archetype_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/archetype_name_label"
-            app:layout_constraintStart_toEndOf="@id/archetype_image"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -39,45 +28,6 @@
             app:layout_constraintStart_toEndOf="@id/archetype_name_label"
             app:layout_constraintTop_toTopOf="@id/archetype_name_label"
             tools:text="Monk" />
-
-        <TextView
-            android:id="@+id/archetype_damage_type_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/damage_type_label"
-            app:layout_constraintStart_toEndOf="@id/archetype_image"
-            app:layout_constraintTop_toBottomOf="@id/archetype_name" />
-
-        <TextView
-            android:id="@+id/archetype_damage_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@id/archetype_damage_type_label"
-            app:layout_constraintTop_toTopOf="@id/archetype_damage_type_label"
-            tools:text="Physical" />
-
-        <TextView
-            android:id="@+id/archetype_health_die_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/health_die_label"
-            app:layout_constraintStart_toEndOf="@id/archetype_image"
-            app:layout_constraintTop_toBottomOf="@id/archetype_damage_type" />
-
-        <TextView
-            android:id="@+id/archetype_health_die"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@id/archetype_health_die_label"
-            app:layout_constraintTop_toTopOf="@id/archetype_health_die_label"
-            tools:text="d12" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,18 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.classapp.R
+import com.example.classapp.data.DnDApi
 import com.example.classapp.databinding.FragmentArchetypeDetailBinding
-import com.example.classapp.databinding.FragmentArchetypeListBinding
+import com.example.classapp.model.DnDClassDetails
 import com.example.classapp.viewmodel.ArchetypeViewModel
+import com.example.classapp.viewmodel.ArchetypeViewModelOld
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,22 +25,24 @@ class ArchetypeDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArchetypeDetailBinding.inflate(inflater, container, false)
 
-        val archetype = archetypeViewModel.fetchById(requireArguments().getInt(BUNDLE_ID))
-
-        binding.archetypeName.text = archetype.archetypeName
-        binding.archetypeDamageType.text = archetype.damageType
-        binding.archetypeHealthDie.text = archetype.healthDie.toString()
-        binding.archetypePosition.text = archetype.position
-        binding.archetypeFunLevel.text = archetype.funLevel.toString()
-        binding.archetypeComplexity.text = archetype.complexity
-        binding.archetypePlayable.text = archetype.playable.toString()
-        binding.archetypeDescription.text = archetype.description
-        Glide.with(binding.root)
-                .load(archetype.image)
-                .into(binding.archetypeImage)
+        //val archetype =
+       // binding.archetypeName.text = archetype.name
+//        val archetype = archetypeViewModelOld.fetchById(requireArguments().getInt(BUNDLE_ID))
+//
+//        binding.archetypeName.text = archetype.archetypeName
+//        binding.archetypeDamageType.text = archetype.damageType
+//        binding.archetypeHealthDie.text = archetype.healthDie.toString()
+//        binding.archetypePosition.text = archetype.position
+//        binding.archetypeFunLevel.text = archetype.funLevel.toString()
+//        binding.archetypeComplexity.text = archetype.complexity
+//        binding.archetypePlayable.text = archetype.playable.toString()
+//        binding.archetypeDescription.text = archetype.description
+//        Glide.with(binding.root)
+//                .load(archetype.image)
+//                .into(binding.archetypeImage)
 
 //        if (arguments != null) {
 //            val archetypeName = requireArguments().getString("archetypeName")

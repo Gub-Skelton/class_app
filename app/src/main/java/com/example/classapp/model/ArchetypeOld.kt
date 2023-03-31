@@ -1,6 +1,6 @@
 package com.example.classapp.model
 
-data class Archetype(
+data class ArchetypeOld(
     val archetypeName: String,
     val damageType: String,
     val image: String,
