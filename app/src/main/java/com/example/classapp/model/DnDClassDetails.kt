@@ -1,6 +1,5 @@
 package com.example.classapp.model
 
-
 import com.squareup.moshi.Json
 
 data class DnDClassDetails(
