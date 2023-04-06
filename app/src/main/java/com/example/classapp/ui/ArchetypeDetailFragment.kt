@@ -1,26 +1,29 @@
 package com.example.classapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
-import com.example.classapp.data.DnDApi
+import androidx.lifecycle.lifecycleScope
 import com.example.classapp.databinding.FragmentArchetypeDetailBinding
-import com.example.classapp.model.DnDClassDetails
-import com.example.classapp.viewmodel.ArchetypeViewModel
-import com.example.classapp.viewmodel.ArchetypeViewModelOld
+import com.example.classapp.viewmodel.ArchetypeDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ArchetypeDetailFragment : Fragment() {
+class ArchetypeDetailFragment(index: String) : Fragment() {
     private var _binding: FragmentArchetypeDetailBinding? = null
     private val binding get() = _binding!!
+    private val archetypeDetailViewModel: ArchetypeDetailViewModel by activityViewModels()
+    private val archetypeIndex = index
 
-    private val archetypeViewModel: ArchetypeViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,58 +31,68 @@ class ArchetypeDetailFragment : Fragment() {
     ): View {
         _binding = FragmentArchetypeDetailBinding.inflate(inflater, container, false)
 
-        //val archetype =
-       // binding.archetypeName.text = archetype.name
-//        val archetype = archetypeViewModelOld.fetchById(requireArguments().getInt(BUNDLE_ID))
-//
-//        binding.archetypeName.text = archetype.archetypeName
-//        binding.archetypeDamageType.text = archetype.damageType
-//        binding.archetypeHealthDie.text = archetype.healthDie.toString()
-//        binding.archetypePosition.text = archetype.position
-//        binding.archetypeFunLevel.text = archetype.funLevel.toString()
-//        binding.archetypeComplexity.text = archetype.complexity
-//        binding.archetypePlayable.text = archetype.playable.toString()
-//        binding.archetypeDescription.text = archetype.description
-//        Glide.with(binding.root)
-//                .load(archetype.image)
-//                .into(binding.archetypeImage)
-
-//        if (arguments != null) {
-//            val archetypeName = requireArguments().getString("archetypeName")
-//            val damageType = requireArguments().getString("damageType")
-//            val archetypeHealthDie = requireArguments().getInt("archetypeHealthDie")
-//            val archetypePosition = requireArguments().getString("archetypePosition")
-//            val archetypeFunLevel = requireArguments().getInt("archetypeFunLevel")
-//            val archetypeComplexity = requireArguments().getString("archetypeComplexity")
-//            val archetypePlayable = requireArguments().getBoolean("archetypePlayable")
-//            val archetypeDescription = requireArguments().getString("archetypeDescription")
-//            val archetypeImage = requireArguments().getString("archetypeImage")
-//
-//            binding.archetypeName.text = archetypeName
-//            binding.archetypeDamageType.text = damageType
-//            binding.archetypeHealthDie.text = archetypeHealthDie.toString()
-//            binding.archetypePosition.text = archetypePosition
-//            binding.archetypeFunLevel.text = archetypeFunLevel.toString()
-//            binding.archetypeComplexity.text = archetypeComplexity
-//            binding.archetypePlayable.text = archetypePlayable.toString()
-//            binding.archetypeDescription.text = archetypeDescription
-//
-//            Glide.with(binding.root)
-//                .load(archetypeImage)
-//                .into(binding.archetypeImage)
-//
-//
-//        }
+        setupObservers()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        archetypeDetailViewModel.fillDataDetail(archetypeIndex)
     }
 
     companion object {
         private const val BUNDLE_ID = "id"
-        fun newInstance(id: Int): ArchetypeDetailFragment {
-            val detailFragment = ArchetypeDetailFragment()
-            detailFragment.arguments = bundleOf(BUNDLE_ID to id)
+        fun newInstance(index : String): ArchetypeDetailFragment {
+            val detailFragment = ArchetypeDetailFragment(index)
+            detailFragment.arguments = bundleOf(BUNDLE_ID to index)
             return detailFragment
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            archetypeDetailViewModel.archetype.collect { event ->
+                when (event) {
+                    ArchetypeDetailViewModel.DnDEventDetail.Failure -> {
+                        binding.progressBar.isGone = true
+                        Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+                    }
+                    ArchetypeDetailViewModel.DnDEventDetail.Loading -> {
+                        binding.progressBar.isVisible = true
+                        Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    }
+                    is ArchetypeDetailViewModel.DnDEventDetail.Success -> {
+                        binding.progressBar.isGone = true
+                        val archetype = event.archetype.body()
+                        if (archetype != null) {
+
+                            binding.archetypeName.text = archetype.name
+                            binding.hitDie.text = archetype.hitDie.toString()
+
+                            var temp = ""
+                            binding.proficiencies.text = ""
+                            for (i in archetype.proficiencies) {
+                                temp = binding.proficiencies.text.toString()
+                                binding.proficiencies.text = temp + i.name + "\n"
+                            }
+
+                            binding.subclasses.text = ""
+                            for (i in archetype.subclasses) {
+                                temp = binding.subclasses.text.toString()
+                                binding.subclasses.text = temp + i.name + "\n"
+                            }
+                        }
+                        Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
+

@@ -38,7 +38,6 @@ class ArchetypeAdapter(
 
     override fun onBindViewHolder(holder: ArchetypeViewHolder, position: Int) {
         val archetype = archetypesList[position]
-
         holder.bind(archetype)
     }
 
@@ -55,13 +54,5 @@ class ArchetypeAdapter(
         fun bind(archetype: DnDClass) {
             binding.archetypeName.text = archetype.name
         }
-//        fun bind(archetype: DnDClassDetails){
-//            binding.archetypeName.text = archetype.name
-//            binding.hitDie.text = archetype.hitDie
-//            binding.proficiencyChoices.text = archetype.proficiencyChoices.toString()
-//            binding.savingThrows.text = archetype.savingThrows.toString()
-//            binding.subclasses.text = archetype.subclasses.toString()
-//
-//        }
     }
 }

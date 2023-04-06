@@ -24,10 +24,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ArchetypeListFragment : Fragment() {
 
-
     private var _binding: FragmentArchetypeListBinding? = null
     private val binding get() = _binding!!
-
     private val archetypeViewModel: ArchetypeViewModel by activityViewModels()
 
     private val archetypeAdapter = ArchetypeAdapter { archetype, _ ->
@@ -35,7 +33,7 @@ class ArchetypeListFragment : Fragment() {
             setReorderingAllowed(true)
             replace(
                 R.id.fragment_container_view,
-                ArchetypeDetailFragment.newInstance(archetype.hashCode()),
+                ArchetypeDetailFragment.newInstance(archetype.index),
             )
             addToBackStack(null)
         }

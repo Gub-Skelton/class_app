@@ -2,7 +2,7 @@ package com.example.classapp.data.repository
 
 import com.example.classapp.data.DnDApi
 import com.example.classapp.data.model.DnDResponse
-//import com.example.classapp.data.model.DnDResponseClassDetails
+import com.example.classapp.data.model.DnDResponseClassDetails
 import javax.inject.Inject
 
 class DnDRepositoryImpl @Inject constructor(
@@ -17,12 +17,12 @@ class DnDRepositoryImpl @Inject constructor(
         }
     }
 
-//    override suspend fun getClass(): DnDResponseClassDetails {
-//        val result = dnDAPI.getClass("barbarian")
-//        return if(result.isSuccessful){
-//            DnDResponseClassDetails.Success(result.body()?.copy()!!)
-//        }else{
-//            DnDResponseClassDetails.Failure
-//        }
-//    }
+    override suspend fun getClass(index : String): DnDResponseClassDetails {
+        val result = dnDAPI.getClass(index)
+        return if(result.isSuccessful){
+            DnDResponseClassDetails.Success(result)
+        }else{
+            DnDResponseClassDetails.Failure
+        }
+    }
 }

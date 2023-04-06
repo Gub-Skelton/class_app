@@ -6,10 +6,10 @@ import com.squareup.moshi.Json
 data class DnDClassDetails(
     @Json(name = "class_levels")
     val classLevels: String,
-    @Json(name = "hit_die")
-    val hitDie: Int,
     @Json(name = "index")
     val index: String,
+    @Json(name = "hit_die")
+    val hitDie: Int,
     @Json(name = "multi_classing")
     val multiClassing: MultiClassing,
     @Json(name = "name")
